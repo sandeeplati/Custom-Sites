@@ -1,0 +1,29 @@
+
+
+
+    public void addUser(Parameters p) throws Exception {
+      try {
+                        Parameters userParams = Functions.getParametersInstance();
+                        userParams.add("first_name","siteuser"); // here siteuser is the first name 
+                        userParams.add("last_name", "one");
+                        userParams.add("email", "siteuser@mail.com"); // email id of site user
+                        String timezone_selector = p.get("timezone_selector");
+                        userParams.add("time_zone", "23");
+                        userParams.add("username","siteuserone"); // here siteuser is the username 
+                        // Set fixed values
+                        userParams.add("team_id", "1");           // The root team ("My Team")
+                        userParams.add("access_profile_id", "5"); // Regular User profile
+                        userParams.add("user_type", "S");         // Site user
+                        userParams.add("notify_by_email", "0");   // 1=send message with system-generated password. 0=don't
+                        userParams.add("password", "welcome"); // Set a fixed initial password
+                        Result r = Functions.addRecord("USER", userParams);
+        
+                        if (r.getCode() < 0) {
+                   String msg = "Error while adding User record:\n"+ r.getMessage();
+                   Functions.throwError(msg);      
+                }
+      } catch (Exception e) {
+            Functions.debug(e);
+        Functions.throwError("An Error Occurred : " + e.getMessage());
+      }
+            }      
